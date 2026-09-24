@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Digital Dictionary</title>
-    <!--<script src="script.js" defer></script>-->
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -15,85 +15,15 @@
     <section>
             <label for="word-input">Search Word:</label>
             <input type="text" id="word-input" placeholder="Type a word (e.g., hello)">
-            <button type="button" id="search-btn">Search</button>
-
-        
+            <button type="button" id="search-btn">Search</button>        
     </section>
+
+    <h2></h2>
 
     <section id="result-container">
         <p>Search for a word above to see it's definition!</p>
     </section>
 
-    <script>
-        const wordInput = document.getElementById('word-input');    
-        const resultContainer = document.getElementById('result-container');
 
-
-        //add event listerner 
-        const searchBtn = document.getElementById('search-btn');
-        searchBtn.addEventListener('click', () => {
-            
-
-            //get value of the input
-            const searchedWord = wordInput.value.trim();
-
-            //call function to fetch
-            if (searchedWord !== ""){
-                lookupWord(searchedWord);
-            }
-        })
-
-        //function to fetch words from API
-        async function lookupWord(word){
-
-            //clear pervious search
-            resultContainer.innerHTML = "";
-
-            try{
-                //fetch data from API
-                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-                //user-friendly error message 
-                if(!response.ok){
-                    throw new Error(`Sorry! We couldn't find definitions for "${word}".`);
-                }
-
-                const data = await response.json();
-
-                //h2 tag for searched word 
-                const wordHeading = document.createElement('h2');
-                wordHeading.textContent = data[0]?.word || word;
-                resultContainer.appendChild(wordHeading);
-
-                //unordered list to hold definitions 
-                const definitionsList = document.createElement('ul');
-
-                //loop through definitions 
-                const meanings = data[0].meanings;
-
-                meanings.forEach(function(meaning){
-                    meaning.definitions.forEach(function (defObject){
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `${defObject.definition}`;
-
-                        definitionsList.appendChild(listItem);
-                    });
-                });
-
-                //append to result-container
-                resultContainer.appendChild(definitionsList);
-
-
-                }catch (error){
-                    //clear and display user-friendly message 
-                    resultContainer.innerHTML = "";
-
-                    const errorMessage = document.createElement('p');
-                    errorMessage.textContent = error.message || "Error: Could not connect to the dictionary service.";
-
-                    resultContainer.appendChild(errorMessage);
-                }
-            }
-    </script>
-    
 </body>
 </html>

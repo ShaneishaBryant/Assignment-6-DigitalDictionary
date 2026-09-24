@@ -2,7 +2,7 @@ How are you passing data from one then() call to another?
 
 We are passing data by returning a value from the callback function inside the first .then(). When the value is returned it is automatically passed as the argument in the next .then().
 
-
+______________________________
 
 
 
@@ -15,7 +15,7 @@ If the API is down or the URL is invalid then the request fails at the network l
 .catch() acts as the safety net at the end of the promise chain. It allows you to display a clear error message. 
 
 
-
+____________________________
 
 How does using the Fetch API to update only a portion of the page improve the “User Experience” compared to a traditional page reload?
 

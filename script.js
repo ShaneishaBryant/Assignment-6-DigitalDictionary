@@ -4,7 +4,7 @@ const wordHeading = document.querySelector("h2"); // Target h2
 const resultContainer = document.querySelector("#result-container"); // Container element
 const searchBtn = document.querySelector("#search-btn");
 
-function searchWord() {
+async function searchWord() {
   const word = wordInput.value.trim();
 
   if (!word) {
@@ -18,14 +18,15 @@ function searchWord() {
   resultContainer.innerHTML = "";
   wordHeading.textContent = "Loading...";
 
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok){
         throw new Error(`HTTP Error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
+    }
+
+    const data = await response.json();
+  
       resultContainer.innerHTML = ""; // Clear previous results
 
       const entry = data.entries?.[0];
@@ -50,11 +51,11 @@ function searchWord() {
       });
 
       resultContainer.appendChild(list); // Add list to result-container element
-    })
-    .catch((error) => {
+    
+    }catch(error) {
       wordHeading.textContent = "Error fetching definition.";
       console.error("Error: Could not connect to the dictionary service.", error);
-    });
+    }
 }
 
 // Trigger search when user clicks the button

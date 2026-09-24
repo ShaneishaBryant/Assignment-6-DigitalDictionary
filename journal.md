@@ -20,3 +20,12 @@ ____________________________
 How does using the Fetch API to update only a portion of the page improve the “User Experience” compared to a traditional page reload?
 
 Using the Fetch API to update specific parts of a page makes user requests feel smooth and instantaneous. Because it avoids a full page refresh, users don't risk losing unsaved progress or input data. Additionally, transferring only the necessary data instead of an entire page significantly reduces bandwidth usage.
+
+_____________________________
+
+
+Do you prefer using then() calls or the async/await syntax here? What is easier for you to read and work through?
+
+I prefer async/await here because it allows you to read the code sequentially without tracking nested callbacks. Additionally, async/await simplifies error handling by using a single try...catch block to manage both network and runtime errors, making the overall logic much easier to read and maintain.
+
+

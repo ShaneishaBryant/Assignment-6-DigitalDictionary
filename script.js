@@ -14,7 +14,7 @@ fetch(url)
         console.log("Word not found");
         return;
     }
-    const key = data[0].word;
+    const key = data[1].word;
     //selects first word, first meaning, first definition, reads text
     const firstDefinition = data[0].meanings[0]?.definitions[0]?.definition;
 
